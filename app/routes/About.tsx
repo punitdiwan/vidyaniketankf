@@ -1,41 +1,31 @@
-import Link from "next/link"
+
 import React, { useState, useEffect } from 'react';
-import { base_url, school_name } from '../SimpleState/auth'
+
 import axios from 'axios';
-import Layout from "../Component/Layout";
-
-const AboutUs = ({ data_header }) => {
-
-  const [data, setdata] = useState("")
-  const get_base_url = base_url.use()
-  const get_school_name = school_name.use()
 
 
+const AboutUs = () => {
+// `${get_base_url}/${get_school_name}/items/tabs?fields=title,heading,body,images.directus_files_id.data.full_url`
+    const [headerData, setHeaderData] = useState<any>(null);
+  const baseUrl = import.meta.env.VITE_BASE_URL;
+  const schoolName = import.meta.env.VITE_SCHOOL;
   useEffect(() => {
-    axios.get(`${get_base_url}/${get_school_name}/items/tabs?fields=title,heading,body,images.directus_files_id.data.full_url`)
-      .then((response) => {
-
-
-        if (response?.data?.data?.length > 0) {
-          console.log(response.data);
-          setdata(response.data.data[0])
-          // response?.data?.data[0].map((data1,i)=>{
-          //     setdata(data1) 
-          //     console.log(data1);
-          // })
-          //   setdata(response) 
-        }
-
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-
-
-  }, [])
+  
+  
+      // // Fetch header config
+      axios
+        .get(`${baseUrl}/${schoolName}/items/tabs?fields=title,heading,body,images.directus_files_id.data.full_url`)
+        .then((response) => {
+          setHeaderData(response.data);
+          // console.log(response.data,"header data")
+        })
+        .catch((error) => {
+          console.error("Error fetching header data:", error);
+        });
+    }, []);
 
   return (
-    <Layout header_data={data_header}>
+  
       <div
         className="mx-3 "
       >
@@ -57,7 +47,7 @@ const AboutUs = ({ data_header }) => {
           src="/images/lower.png"
         />
       </div>
-    </Layout>
+ 
   );
 
 }
@@ -65,19 +55,19 @@ const AboutUs = ({ data_header }) => {
 export default AboutUs;
 
 
-export async function getStaticProps(context) {
-  let data_header
+// export async function getStaticProps(context) {
+//   let data_header
 
-  try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/${process.env.NEXT_PUBLIC_SCHOOL}/items/config?fields=*,logo.data.full_url`)
+//   try {
+//     const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/${process.env.NEXT_PUBLIC_SCHOOL}/items/config?fields=*,logo.data.full_url`)
 
-    data_header = await response.json()
-  }
-  catch (error) {
-    data_header = false
-  }
-  return {
-    props: { data_header },
-    revalidate: 2, // will be passed to the page component as props
-  }
-}
+//     data_header = await response.json()
+//   }
+//   catch (error) {
+//     data_header = false
+//   }
+//   return {
+//     props: { data_header },
+//     revalidate: 2, // will be passed to the page component as props
+//   }
+// }

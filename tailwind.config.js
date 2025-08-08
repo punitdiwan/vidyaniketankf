@@ -1,14 +1,16 @@
-module.exports = {
-  purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}','Component/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
-  // purge: ['Component/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,jsx,ts,tsx}", // ← Very important!
+  ],
   darkMode: false, // or 'media' or 'class'
-  mode: "jit",
   theme: {
     extend: {
       backgroundImage: {
         'Admission': "url('/images/ad_lower.jpeg')",
-      'Facilities': "url('/images/ray.JPG')",
-                },
+        'Facilities': "url('/images/ray.JPG')",
+      },
       colors: {
         footers: {
           default: "#2f2629",
@@ -19,9 +21,5 @@ module.exports = {
       },
     },
   },
-  variants: {
-    extend: {},
-  },
-  plugins: [
-  ],
+  plugins: [],
 };

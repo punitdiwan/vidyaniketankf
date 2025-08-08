@@ -5,14 +5,15 @@ import Calendar from 'react-calendar';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
 import axios from 'axios';
-import { base_url, school_name } from '../SimpleState/auth'
+import VerticalMarquee from './Vertical';
+
 
 const HomeEvents = () => {
-    const [value, onChange] = useState(new Date()); //this is for Calendar
-    const [data, setdata] = useState("")
-    const [data1, setdata1] = useState("")
-    const get_base_url = base_url.use()
-    const get_school_name = school_name.use()
+    const [value, onChange] = useState<any>(new Date()); //this is for Calendar
+    const [data, setdata] = useState<any>("")
+    const [data1, setdata1] = useState<any>([])
+   const baseUrl = import.meta.env.VITE_BASE_URL;
+  const schoolName = import.meta.env.VITE_SCHOOL;
 
     const slides = [
         { title: "/images/is3.jpg ", description: 'Name-1' },
@@ -20,21 +21,24 @@ const HomeEvents = () => {
     ];
 
 
-    const filteredData = [
-        { id: 2, created_on: "2020-12-15T05:19:39+00:00", eventdate: "2020-12-23", title: "Books will be available on the specific date." },
-        { id: 3, created_on: "2020-12-15T08:52:50+00:00", eventdate: "2020-12-21", title: "Result has been declared" },
+    // const filteredData = [
+    //     { id: 2, created_on: "2020-12-15T05:19:39+00:00", eventdate: "2020-12-23", title: "Books will be available on the specific date." },
+    //     { id: 3, created_on: "2020-12-15T08:52:50+00:00", eventdate: "2020-12-21", title: "Result has been declared" },
 
-        { id: 2, created_on: "2020-12-15T05:19:39+00:00", eventdate: "2020-12-23", title: "Books will be available on the specific date." },
-        { id: 3, created_on: "2020-12-15T08:52:50+00:00", eventdate: "2020-12-21", title: "Result has been declared" },
+    //     { id: 2, created_on: "2020-12-15T05:19:39+00:00", eventdate: "2020-12-23", title: "Books will be available on the specific date." },
+    //     { id: 3, created_on: "2020-12-15T08:52:50+00:00", eventdate: "2020-12-21", title: "Result has been declared" },
 
-    ]
+    // ]
 
 
     useEffect(() => {
-        axios.get(`${get_base_url}/${get_school_name}/items/toppers?fields=*,photo.*`)
-            .then((response) => {
+        axios.get(`${baseUrl}/${schoolName}/items/toppers?fields=*,photo.*`)
+            .then((response:any) => {
 
                 if (response?.data?.data?.length > 0) {
+                    console.log('====================================');
+                    console.log("response",response);
+                    console.log('====================================');
                     setdata(response)
                 }
             })
@@ -43,8 +47,8 @@ const HomeEvents = () => {
             })
 
 
-        axios.get(`${get_base_url}/${get_school_name}/items/events`)
-            .then((response) => {
+        axios.get(`${baseUrl}/${schoolName}/items/events`)
+            .then((response:any) => {
 
                 if (response?.data?.data?.length > 0) {
                     setdata1(response)
@@ -65,10 +69,10 @@ const HomeEvents = () => {
             <div className="mx-3">
                 <h1 className="py-2 text-center text-[white] "><b> News & Events</b></h1>
                 <div style={{ height: "305px", width: "100%" }} className="m-2 bg-[#d4d1d1]">
-                    <marquee behavior="scroll" direction="up" scrollamount="4" style={{ height: "305px", width: "100%" }}>
+                    {/* <marquee behavior="scroll" direction="up" scrollamount="4" style={{ height: "305px", width: "100%" }}>
                         <div className="m-5 bg-[white]  ">
                             {
-                                data1?.data?.data.map((ei, i) =>
+                                data1?.data?.data.map((ei:any, i:any) =>
                                 (<div className="flex mb-2" key={i}>
                                     <div className="bg-indigo-900 text-[white] w-[25%]  py-5 px-2  ">{ei?.eventdate}</div>
                                     <div className="px-2 py-5 bg-purple-100 w-[75%]">{ei?.title}</div>
@@ -84,7 +88,8 @@ const HomeEvents = () => {
 
                         </div>
 
-                    </marquee>
+                    </marquee> */}
+                    <VerticalMarquee data1={data1}/>
                 </div>
 
             </div>
@@ -101,19 +106,19 @@ const HomeEvents = () => {
 
             </div>
             <div className="mx-3">
-                <h1 className="py-2 text-center text-[white] "><b> Topper (2019-2020)</b></h1>
+                <h1 className="py-2 text-center text-[white] "><b> Topper (2024-2025)</b></h1>
 
-                <Carousel showThumbs={false} autoPlay={true} infiniteLoop={true}   >
+                <Carousel showThumbs={false} autoPlay={true} infiniteLoop={true}   showStatus={false} showIndicators={false} >
                     {
-                        data?.data?.data.map((item, index) => {
+                        data?.data?.data.map((item:any, index:any) => {
                             return <div className="carousel-inner" role="listbox" key={index} >
                                 <div className='carousel ' role="listbox" style={{ marginTop: "15px" }}>
                                     <img
-                                        src={item?.photo?.data?.full_url}
+                                        src={item?.photo?.data?.full_url?.replace('http://', 'https://')}
                                         style={{ height: "250px", width: "100%", border: "1px solid #ccc" }}
                                         alt="sorry_no_img"
                                     />
-                                    <h4 className="p-0 py-3 m-0 text-[white]" style={{ border: "1px solid #ccc" }}>{item.name}</h4>
+                                   <h4 className="p-0 py-3 m-0 text-[white]" style={{ border: "1px solid #ccc" }}>{item.name}</h4>
                                 </div>
                             </div>
                         })

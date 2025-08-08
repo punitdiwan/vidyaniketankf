@@ -1,18 +1,18 @@
-import Link from "next/link" 
+
 import React, { useState, useEffect } from 'react';
-import { base_url, school_name } from '../SimpleState/auth'
+
 import axios from 'axios';
 
 
-const SchoolMassage = ({ header_data }) => {
+const SchoolMassage = () => {
 
-  const [data, setdata] = useState("")
-  const get_base_url = base_url.use()
-  const get_school_name = school_name.use()
+  const [data, setdata] = useState<any>("")
+  const baseUrl = import.meta.env.VITE_BASE_URL;
+  const schoolName = import.meta.env.VITE_SCHOOL;
  
 
   useEffect(() => {
-    axios.get(`${get_base_url}/${get_school_name}/items/tabs?fields=title,heading,body,images.directus_files_id.data.full_url`)
+    axios.get(`${baseUrl}/${schoolName}/items/tabs?fields=title,heading,body,images.directus_files_id.data.full_url`)
       .then((response) => {
  
 
@@ -39,6 +39,7 @@ const SchoolMassage = ({ header_data }) => {
 
   
   return (
+    <>
     <div>
       <div
         className="flex flex-col md:flex-row w-full justify-center font-normal leading-7 
@@ -46,7 +47,7 @@ text-base px-10 md:px-16 py-10 text-gray-600 bg-[#cbdcf8]"
       >
         <div className="w-5/5  justify-center mb-5 flex align-middle md:w-6/12 ">
 
-          <img className=" h-[150px] md:h-[200px] lg:h-[250px]" src={header_data?.data ? header_data?.data[0]?.logo?.data?.full_url : "https://rosemarydn.com/images/logo.png"}
+          <img className=" h-[150px] md:h-[200px] lg:h-[250px]" src={data?.data ? data?.data[0]?.logo?.data?.full_url?.replace('http://', 'https://') : "https://rosemarydn.com/images/logo.png"}
           //  src="https://rosemarydn.com/images/school.PNG"
           />
         </div>
@@ -86,6 +87,8 @@ text-base px-10 md:px-16 py-10 text-gray-600 bg-[#cbdcf8]"
         </div>
       </div>
     </div>
+    
+    </>
   )
 }
 

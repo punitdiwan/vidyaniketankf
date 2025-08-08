@@ -1,10 +1,9 @@
-import React, { Component } from "react";
-import Layout from "../Component/Layout";
 
-const Facilities =({ data_header })=>  {
+
+const Facilities =()=>  {
     return (
-    <Layout header_data={data_header} >
-      <div className="w-full h-full pl-5   bg-no-repeat bg-cover bg-Admission pt-16 ">
+   
+      <div className="w-full h-full pl-5   bg-no-repeat bg-cover bg-[url('/images/ad_lower.jpeg')] pt-16 ">
           <div className="w-10/12 pt-5 pb-5 font-serif mx:10 sm:mx-16">
             <h2 className="!text-3xl flex pt-2 font-serif text-[#009043] bg-yellow-50 pl-3  h-[60px] ">
               Facilities
@@ -106,7 +105,7 @@ const Facilities =({ data_header })=>  {
             caroms, table tennis etc. are also available.
           </p>
         </div>
-      </div></Layout>
+      </div>
     );
    
 }
@@ -115,19 +114,3 @@ export default Facilities;
 
 
 
-export async function getStaticProps(context) {
-  let data_header
-
-  try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/${process.env.NEXT_PUBLIC_SCHOOL}/items/config?fields=*,logo.data.full_url`)
-
-    data_header = await response.json()
-  }
-  catch (error) {
-    data_header = false
-  }
-  return {
-    props: { data_header },
-    revalidate: 2, // will be passed to the page component as props
-  }
-}

@@ -1,32 +1,55 @@
 import React, { useState, useEffect } from 'react'
-import Layout from '../Component/Layout'
-import { base_url, school_name } from '../SimpleState/auth'
 import axios from 'axios'
+import LoaderBox from '~/Components/GalleryLoader';
+import ImageLoader from '~/Components/imageLoader';
 
-const ManagementDesk = ({ data_header,chairman_data }) => {
+const ManagementDesk = () => {
 
-   
+    const [headerData, setHeaderData] = useState<any>(null);
+    const baseUrl = import.meta.env.VITE_BASE_URL;
+    const schoolName = import.meta.env.VITE_SCHOOL;
+
+    const [isloading,setIsLoading] = useState<any>(false)
+
+  useEffect(() => {
+  
+  setIsLoading(true)
+      // // Fetch header config
+      axios
+        .get(`${baseUrl}/${schoolName}/items/faculty?status=published&fields=*.*`)
+        .then((response) => {
+          setHeaderData(response.data);
+          setIsLoading(false)
+        //   console.log(response.data,"header data")
+        })
+        .catch((error) => {
+            setIsLoading(false)
+          console.error("Error fetching header data:", error);
+        });
+    }, []);
 
 
   return (
-    <Layout header_data={data_header}>
-      <div  className="lg:mt-[60px]">
+    <>
+      <div  className="">
       <img className="w-full" src="/images/upper.png" />
 
         <div className="grid gap-10 mx-10 sm:grid-cols-3 ">
           <div className="flex justify-center text-center ">
             <div className=" sm:h-8/12 sm:w-8/12 md:mt-10" >
-            {" "}
-            <img
-              className="shadow-2xl rounded-2  shadow1 "
-              src={chairman_data?.data?.length > 0? chairman_data?.data[2]?.photo?.data?.full_url : "/images/demo1.jpg"}
-              // src="https://rosemarydn.com/images/skmishra.JPG"
-              alt="Card image cap"
-              style={{ width: "100%", height: "300px" }}
-            />
+                <div className='relative w-full max-w-md h-[300px]'>
+                <img
+                className="shadow-2xl rounded-2  shadow1 "
+                src={ headerData?.data[2]?.photo?.data?.full_url?.replace('http://', 'https://') }
+                // src="https://rosemarydn.com/images/skmishra.JPG"
+                alt="Card image cap"
+                style={{ width: "100%", height: "300px" }}
+                />
+                {isloading && <ImageLoader/>}
+            </div>
             <div className="bg-blue-600 h-[50px] flex items-center justify-center shadow1">
               <h3 className="text-xl font-medium text-center text-white ">
-              {chairman_data?.data?.length > 0? chairman_data?.data[2]?.full_name : "Demo Name"}
+              {headerData?.data?.length > 0? headerData?.data[2]?.full_name : "Demo Name"}
                 {/* SK Mishra */}
               </h3>
             </div>
@@ -35,11 +58,11 @@ const ManagementDesk = ({ data_header,chairman_data }) => {
 
           <div className="sm:col-span-2 sm:mx-10 ">
             <h5 className="text-2xl font-medium text-center">
-            {chairman_data?.data?.length > 0? chairman_data?.data[2]?.message : "WORD FROM CHAIRMAN :"}
+            {headerData?.data?.length > 0? headerData?.data[2]?.message : "WORD FROM CHAIRMAN :"}
               {/* Management Message */}
             </h5>
             <p className="pb-0 mb-0 text-base font-normal sm:mr-5 sm:pr-5">
-            {chairman_data?.data?.length > 0? chairman_data?.data[2]?.description : `Education should bring out the perfection which is already present in each
+            {headerData?.data?.length > 0? headerData?.data[2]?.description : `Education should bring out the perfection which is already present in each
                                     child. An institution should provide an environment which helps the child in
                                     achieving this perfection. It should help him develop his inherent qualities
                                     and all the aspects of his personality. This can be achieved when those
@@ -62,7 +85,9 @@ const ManagementDesk = ({ data_header,chairman_data }) => {
           </div>
         </div>
         <img className="w-full" src="/images/lower.png" />
-      </div></Layout>
+      </div>
+      {isloading&&<LoaderBox/>}
+      </>
   );
 
 }
@@ -71,29 +96,29 @@ export default ManagementDesk;
 
 
 
-export async function getStaticProps(context) {
-  let data_header
+// export async function getStaticProps(context) {
+//   let data_header
 
-  try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/${process.env.NEXT_PUBLIC_SCHOOL}/items/config?fields=*,logo.data.full_url`)
+//   try {
+//     const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/${process.env.NEXT_PUBLIC_SCHOOL}/items/config?fields=*,logo.data.full_url`)
 
-    data_header = await response.json()
-  }
-  catch (error) {
-    data_header = false
-  }
-  let chairman_data
-  try {
-      const response1 = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/${process.env.NEXT_PUBLIC_SCHOOL}/items/faculty?status=published&fields=*.*`)
+//     data_header = await response.json()
+//   }
+//   catch (error) {
+//     data_header = false
+//   }
+//   let chairman_data
+//   try {
+//       const response1 = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/${process.env.NEXT_PUBLIC_SCHOOL}/items/faculty?status=published&fields=*.*`)
 
-      chairman_data = await response1.json()
-  }
-  catch (error) {
-      chairman_data = false
-  }
+//       chairman_data = await response1.json()
+//   }
+//   catch (error) {
+//       chairman_data = false
+//   }
 
-  return {
-      props: { data_header, chairman_data },
-      revalidate: 1, // will be passed to the page component as props
-  }
-}
+//   return {
+//       props: { data_header, chairman_data },
+//       revalidate: 1, // will be passed to the page component as props
+//   }
+// }
