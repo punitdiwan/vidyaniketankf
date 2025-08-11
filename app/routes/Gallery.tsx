@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { AnimatePresence } from "framer-motion";
 import LoaderBox from '~/Components/GalleryLoader';
+import ImageLoader from '~/Components/imageLoader';
 
 const Gallery = () => { 
   const slides = [
@@ -41,7 +42,8 @@ const Gallery = () => {
 
   return (
    
-    <>
+    <>  
+    <div className='relative w-full '>
         <div className="container-fluid ">
           <div className="  md:grid p-5  md:grid-cols-5 sm:grid pt-20 sm:grid-cols-2   bg-[#0066cc]">
             {
@@ -51,31 +53,22 @@ const Gallery = () => {
                   <div key={i} className="p-2">
                     <img
                       src={item.photo.data.full_url?.replace('http://', 'https://')}
-                      className="w-full h-[200px]  rounded-lg"
+                      className="w-full h-[200px]  rounded-lg shadow-md"
                       alt="no_img"
                     />
                   </div>  
                 );
               })
-              // :
-              // slides.map((item, i) => {
-              //   return (
-              //     <div key={i} className="p-2">
-              //       <img
-              //         src={item?.title}
-              //         className="w-full h-[200px]  rounded-lg"
-              //         alt="no_img"
-              //       />
-              //     </div>
-              //   );
-              // })
               }
           </div>
         </div>
-          {/* {isloading && <LoaderBox/>} */}
-          <AnimatePresence>
+        <div className='h-[200px]'>
+          {isloading && <ImageLoader />}
+        </div>
+          {/* <AnimatePresence>
             {isloading && <LoaderBox />}
-          </AnimatePresence>
+          </AnimatePresence> */}
+          </div>
       </>
  
   );

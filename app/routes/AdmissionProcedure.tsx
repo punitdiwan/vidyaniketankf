@@ -22,7 +22,7 @@ const AdmissionProcedure = () => {
       return (
            
                   <div
-  className="w-full h-full bg-[url('/public/images/ad_lower.jpeg')] bg-no-repeat bg-cover "
+  className="w-full h-full bg-[url('/images/ad_lower.jpeg')] bg-no-repeat bg-cover "
 
 >
   <h5 className="text-2xl font-medium text-center leading-tight pt-5">

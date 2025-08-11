@@ -39,7 +39,8 @@ const [isloading,setIsLoading] = useState<any>(false)
 
 
 
-          <div className=" flex justify-center text-center "><div className=" sm:h-8/12 sm:w-8/12 sm:mt-10" >
+          <div className=" flex justify-center text-center ">
+            <div className=" sm:h-8/12 sm:w-8/12 sm:mt-10 " >
           
             <div className='relative w-full max-w-md h-[300px]'>
                 <img
@@ -62,7 +63,7 @@ const [isloading,setIsLoading] = useState<any>(false)
 
           <div className="sm:col-span-2 sm:mx-10 ">
             <h5 className="text-2xl font-medium text-center">
-              {headerData?.data?.length > 0 ? headerData?.data[1]?.message : "WORD FROM THE DIRECTOR :"}
+              {headerData?.data?.length > 0 ? headerData?.data[1]?.message : "Director Message"}
 
             </h5>
             <p className="text-base font-normal sm:mr-5 sm:pr-5">
@@ -88,7 +89,7 @@ const [isloading,setIsLoading] = useState<any>(false)
         </div>
         <img className="w-full" src="/images/lower.png" />
       </div>
-       {isloading && <LoaderBox/>}
+       {/* {isloading && <LoaderBox/>} */}
       </>
   );
 }

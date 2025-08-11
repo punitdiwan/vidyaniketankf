@@ -14,7 +14,7 @@ const ManagementDesk = () => {
   useEffect(() => {
   
   setIsLoading(true)
-      // // Fetch header config
+      
       axios
         .get(`${baseUrl}/${schoolName}/items/faculty?status=published&fields=*.*`)
         .then((response) => {
@@ -58,7 +58,7 @@ const ManagementDesk = () => {
 
           <div className="sm:col-span-2 sm:mx-10 ">
             <h5 className="text-2xl font-medium text-center">
-            {headerData?.data?.length > 0? headerData?.data[2]?.message : "WORD FROM CHAIRMAN :"}
+            {headerData?.data?.length > 0? headerData?.data[2]?.message : "Management Message"}
               {/* Management Message */}
             </h5>
             <p className="pb-0 mb-0 text-base font-normal sm:mr-5 sm:pr-5">
@@ -86,7 +86,7 @@ const ManagementDesk = () => {
         </div>
         <img className="w-full" src="/images/lower.png" />
       </div>
-      {isloading&&<LoaderBox/>}
+      {/* {isloading&&<LoaderBox/>} */}
       </>
   );
 
@@ -96,29 +96,3 @@ export default ManagementDesk;
 
 
 
-// export async function getStaticProps(context) {
-//   let data_header
-
-//   try {
-//     const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/${process.env.NEXT_PUBLIC_SCHOOL}/items/config?fields=*,logo.data.full_url`)
-
-//     data_header = await response.json()
-//   }
-//   catch (error) {
-//     data_header = false
-//   }
-//   let chairman_data
-//   try {
-//       const response1 = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/${process.env.NEXT_PUBLIC_SCHOOL}/items/faculty?status=published&fields=*.*`)
-
-//       chairman_data = await response1.json()
-//   }
-//   catch (error) {
-//       chairman_data = false
-//   }
-
-//   return {
-//       props: { data_header, chairman_data },
-//       revalidate: 1, // will be passed to the page component as props
-//   }
-// }

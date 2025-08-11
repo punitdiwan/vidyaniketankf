@@ -4,7 +4,7 @@ const ImageLoader = () => {
   return (
     <div>
       <motion.div
-          className="absolute inset-0 flex items-center justify-center bg-white/70 backdrop-blur-sm rounded-md"
+          className="absolute inset-0 flex items-center justify-center bg-white rounded-md"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0, transition: { duration: 0.4 } }}

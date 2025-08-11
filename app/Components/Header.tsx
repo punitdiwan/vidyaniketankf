@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router";
-
+import { Link, NavLink } from "react-router";
 
 const Header = ({ header_data }:any) => {
   const [abovetop, setabovetop] = useState("8rem");
@@ -39,7 +38,7 @@ const Header = ({ header_data }:any) => {
       .get(`${baseUrl}/${schoolName}/items/config?fields=*,logo.data.full_url`)
       .then((response) => {
         setHeaderData(response.data);
-        console.log(response.data,"header data")
+        // console.log(response.data,"header data")
       })
       .catch((error) => {
         console.error("Error fetching header data:", error);
@@ -51,7 +50,7 @@ const Header = ({ header_data }:any) => {
         <img
           className="h-20 w-20 md:mr-1"
           src={
-            headerData?.data[0]?.logo?.data?.full_url.replace("http://", "https://")
+          headerData?.data[0]?  headerData?.data[0]?.logo?.data?.full_url.replace("http://", "https://") : "/logo.png"
           
           }
           alt="School Logo"
@@ -91,13 +90,13 @@ const Header = ({ header_data }:any) => {
           id="menu"
         >
           <div className="text-sm lg:flex-grow sm:pl-0 lg:pl-52">
-            <Link
+            <NavLink
               to={"/"}
               className="block mt-2 mr-4 text-center text-black hover:no-underline lg:inline-block lg:mt-0"
               onClick={() => setMenuOpen(false)}
             >
               Home
-            </Link>
+            </NavLink>
 
             {/* About Us Dropdown */}
             <div className="block text-center lg:inline-block relative group">
@@ -116,13 +115,13 @@ const Header = ({ header_data }:any) => {
               </button>
               <ul className="absolute z-20 hidden pt-0 pb-0 text-gray-700 dropdown-menu lg:group-hover:block lg:group-focus:block lg:ml-[40px]">
                 <li className="border-b border-gray-700">
-                  <Link
+                  <NavLink
                     to="/AboutUs"
                     className="block px-4 py-2 whitespace-nowrap bg-[#272d57] text-yellow-50 hover:bg-white hover:text-black hover:no-underline"
                     onClick={() => setMenuOpen(false)}
                   >
                     About Us
-                  </Link>
+                  </NavLink>
                 </li>
                 <li className="border-b border-gray-700">
                   <Link

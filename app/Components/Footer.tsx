@@ -13,7 +13,7 @@ const Footer = () => {
         .get(`${baseUrl}/${schoolName}/items/config?fields=*,logo.data.full_url`)
         .then((response) => {
           setHeaderData(response.data);
-          console.log(response.data,"header data")
+          // console.log(response.data,"Footer data")
         })
         .catch((error) => {
           console.error("Error fetching header data:", error);
@@ -28,12 +28,12 @@ const Footer = () => {
             src={
               headerData?.data?.[0]?.logo?.data?.full_url
                 ? headerData.data[0].logo.data.full_url.replace("http://", "https://")
-                : "https://rosemarydn.com/images/logo.png"}
+                : "logo.png"}
               // src="https://rosemarydn.com/images/logo.png"
               className=" h-[5rem] w-[5rem]"
             />
             <h4
-              className="flex items-center ml-3 text-basetext-[#e0d917]
+              className="flex items-center ml-3 text-basetext-[#e0d917] capitalize
                 "
             >
                {headerData?.data? headerData?.data[0]?.title : "Maitretech Academy Public School"}
@@ -114,7 +114,7 @@ const Footer = () => {
                 d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0z"
               ></path>
             </svg>
-            <div className="ml-2 ">
+            <div className="ml-2 capitalize">
             {headerData?.data? headerData?.data[0]?.address : " Maitretech School Bhopal "}
               
             {/* Maitretech School Bhopal */}

@@ -6,12 +6,7 @@ import { Carousel } from "react-responsive-carousel";
 
 
 const Slider = ({ headerData }: { headerData: any }) => {
-    //  const [headerData, setHeaderData] = useState<any>(null);
         
-   
-
-
-  
 
   return (
     <div>
@@ -29,19 +24,6 @@ const Slider = ({ headerData }: { headerData: any }) => {
                 </div>
               </div>
             })
-            // :
-            // slides.map((slide, index) => {
-            //   return <div className="carousel-inner" key={index} role="listbox">
-            //     <div className='carousel' role="listbox">
-            //       <img
-            //         src={slide.title}
-            //         height={500} width={1500}
-            //         alt="sorry_no_img"
-            //         className="w-full md:h-[400px] lg:h-[500px]"
-            //       />
-            //     </div>
-            //   </div>
-            // })
             }
       </Carousel>
       

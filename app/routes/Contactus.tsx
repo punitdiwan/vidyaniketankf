@@ -45,14 +45,14 @@ const Contactus = () => {
             <hr className="md:w-[350px]" />
             <strong>Address.</strong>
             <address className="md:w-[350px] text-black">
-            {headerData?.data? headerData?.data[0]?.address : "  Maitretech School Bhopal"}
+            {headerData?.data? headerData?.data[0]?.address : "Loading..."}
               {/* Dwarka Nagar , Nisatpura , Bhopal-462010 Phone: 0755-2740018 */}
             </address>
-<div>phone: { headerData?.data[0]?.phone }</div>
+            <div>phone: {headerData?.data? headerData?.data[0]?.phone : "Loading..." }</div>
             <strong>Email:</strong>
             <address className="text-black lowercase">
               <a>
-              {headerData?.data[0]?.email }
+              {headerData?.data? headerData?.data[0]?.email :"Loading..."}
                 {/* rosemarydwarka@gmail.com */}
                 </a>
             </address>
@@ -66,19 +66,4 @@ const Contactus = () => {
 export default Contactus;
 
 
-// export async function getStaticProps(context) { 
-//   let data_header 
 
-//   try {
-//     const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/${process.env.NEXT_PUBLIC_SCHOOL}/items/config?fields=*,logo.data.full_url`)
- 
-//     data_header = await response.json()  
-//   } 
-//   catch (error) {
-//     data_header = false 
-//   } 
-//   return {
-//     props: { data_header },
-//     revalidate: 2, // will be passed to the page component as props
-//   }
-// }

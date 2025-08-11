@@ -62,7 +62,7 @@ const PrincipalMessage = () => {
 
           <div className="sm:col-span-2 sm:mx-10 ">
             <h5 className="text-2xl font-medium text-center">
-              { headerData?.data[0]?.message }
+              { headerData?.data ? headerData?.data[0]?.message : "Principal Message"}
               {/* Principal Message */}
             </h5>
             <p className="text-base font-normal sm:mr-5 sm:pr-5">
@@ -91,7 +91,7 @@ const PrincipalMessage = () => {
         </div>
         <img className="w-full" src="/images/lower.png" />
       </div>
-                {isloading&&<LoaderBox/>}
+                {/* {isloading&&<LoaderBox/>} */}
       </>
   );
 
@@ -101,30 +101,3 @@ export default PrincipalMessage;
 
 
 
-// export async function getStaticProps(context) {
-//   let data_header
-
-//   try {
-//     const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/${process.env.NEXT_PUBLIC_SCHOOL}/items/config?fields=*,logo.data.full_url`)
-
-//     data_header = await response.json()
-//   }
-//   catch (error) {
-//     data_header = false
-//   }
-//   let principle_data
-
-//   try {
-//     const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/${process.env.NEXT_PUBLIC_SCHOOL}/items/faculty?status=published&fields=*.*`)
-
-//     principle_data = await response.json()
-//   }
-//   catch (error) {
-//     principle_data = false
-//   }
-
-//   return {
-//     props: { data_header, principle_data },
-//     revalidate: 1, // will be passed to the page component as props
-//   }
-// }
