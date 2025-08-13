@@ -7,8 +7,7 @@ const Footer = () => {
   const schoolName = import.meta.env.VITE_SCHOOL;
   useEffect(() => {
   
-  
-      // // Fetch header config
+
       axios
         .get(`${baseUrl}/${schoolName}/items/config?fields=*,logo.data.full_url`)
         .then((response) => {
