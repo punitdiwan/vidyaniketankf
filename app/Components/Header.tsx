@@ -50,17 +50,17 @@ const Header = ({ header_data }:any) => {
         <img
           className="h-20 w-20 md:mr-1"
           src={
-          headerData?.data[0]?  headerData?.data[0]?.logo?.data?.full_url.replace("http://", "https://") : "/logo.png"
+          headerData?.data[0]?  headerData?.data[0]?.logo?.data?.full_url.replace("http://", "https://") : "/Logo.png"
           
           }
           alt="School Logo"
         />
         <div className="text-[#272d57] items-center">
           <span className="font-serif text-xl tracking-normal ml-1 sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl capitalize">
-            {headerData?.data[0]?.title }
+            {headerData?.data[0] ? headerData?.data[0]?.title : "Vidyaniketankf"}
           </span>
           <p className="flex ml-10 md:ml-2 md:justify-center font-medium md:font-semibold capitalize">
-            {headerData?.data[0]?.address || "Dwarka Nagar Bhopal"}
+            {headerData?.data[0]?.address || "Bhopal"}
           </p>
         </div>
       </div>

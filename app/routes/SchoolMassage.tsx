@@ -47,7 +47,7 @@ text-base px-10 md:px-16 py-10 text-gray-600 bg-[#cbdcf8]"
       >
         <div className="w-5/5  justify-center mb-5 flex align-middle md:w-6/12 ">
 
-          <img className=" h-[150px] md:h-[200px] lg:h-[250px]" src={data?.data ? data?.data[0]?.logo?.data?.full_url?.replace('http://', 'https://') : "https://rosemarydn.com/images/logo.png"}
+          <img className=" h-[150px] md:h-[200px] lg:h-[250px]" src={data?.data ? data?.data[0]?.logo?.data?.full_url?.replace('http://', 'https://') : "/Logo.png"}
           //  src="https://rosemarydn.com/images/school.PNG"
           />
         </div>

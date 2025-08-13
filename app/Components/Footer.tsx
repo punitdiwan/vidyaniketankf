@@ -28,7 +28,7 @@ const Footer = () => {
             src={
               headerData?.data?.[0]?.logo?.data?.full_url
                 ? headerData.data[0].logo.data.full_url.replace("http://", "https://")
-                : "logo.png"}
+                : "/Logo.png"}
               // src="https://rosemarydn.com/images/logo.png"
               className=" h-[5rem] w-[5rem]"
             />
