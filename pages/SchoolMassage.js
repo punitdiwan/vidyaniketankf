@@ -17,7 +17,6 @@ const SchoolMassage = ({ header_data }) => {
  
 
         if (response?.data?.data?.length > 0) {
-            console.log(response.data);
             setdata(response.data.data[0]) 
             // response?.data?.data[0].map((data1,i)=>{
             //     setdata(data1) 
@@ -27,8 +26,7 @@ const SchoolMassage = ({ header_data }) => {
         }
          
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
       })
 
 

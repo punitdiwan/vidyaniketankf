@@ -17,7 +17,6 @@ const AboutUs = ({ data_header }) => {
 
 
         if (response?.data?.data?.length > 0) {
-          console.log(response.data);
           setdata(response.data.data[0])
           // response?.data?.data[0].map((data1,i)=>{
           //     setdata(data1) 
@@ -27,8 +26,7 @@ const AboutUs = ({ data_header }) => {
         }
 
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
       })
 
 
@@ -78,6 +76,6 @@ export async function getStaticProps(context) {
   }
   return {
     props: { data_header },
-    revalidate: 2, // will be passed to the page component as props
+    revalidate: 86400, // revalidate once per day
   }
 }
