@@ -4,6 +4,7 @@ import Layout from "../Component/Layout";
 const Contactus = ({data_header}) => {
 
 
+  // console.log(data_header)
   return (
     <Layout  header_data={data_header}>
       <div className="flex flex-col mb-10 lg:mx-28 pt-20 ">
@@ -12,7 +13,7 @@ const Contactus = ({data_header}) => {
         </div>
         <div className="mt-[15px] lg:mx-16 px-6     flex md:flex-row flex-col">
           <iframe className=" md:w-[600px] md:h-[450px] "
-            src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3665.0753547332783!2d77.42991967532149!3d23.276711478996425!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjPCsDE2JzM2LjIiTiA3N8KwMjUnNTcuMCJF!5e0!3m2!1sen!2sin!4v1755601047451!5m2!1sen!2sin"
+            src= "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d58646.191002103806!2d77.435538!3d23.265386!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x397c69d068d21741%3A0x365ce742c770ee90!2sSemra%20Kalan%2C%20Shanker%20Garden%2C%20Subhash%20Colony%2C%20Bhopal%2C%20Madhya%20Pradesh%20462010%2C%20India!5e0!3m2!1sen!2sus!4v1635161005508!5m2!1sen!2sus"
 
             style={{ border: "0" }}
             allowFullScreen=""
@@ -30,7 +31,7 @@ const Contactus = ({data_header}) => {
             {data_header?.data? data_header?.data[0]?.address : "  Maitretech School Bhopal"}
               {/* Dwarka Nagar , Nisatpura , Bhopal-462010 Phone: 0755-2740018 */}
             </address>
-<div>phone: {data_header?.data? data_header?.data[0]?.phone : "111111211"}</div>
+
             <strong>Email:</strong>
             <address className="text-black">
               <a>
@@ -61,6 +62,6 @@ export async function getStaticProps(context) {
   } 
   return {
     props: { data_header },
-    revalidate: 86400, // revalidate once per day
+    revalidate: 86400, // 24 hours - reduces serverless invocations on Vercel Pro
   }
 }

@@ -17,6 +17,7 @@ const AboutUs = ({ data_header }) => {
 
 
         if (response?.data?.data?.length > 0) {
+          // console.log(response.data);
           setdata(response.data.data[0])
           // response?.data?.data[0].map((data1,i)=>{
           //     setdata(data1) 
@@ -26,7 +27,8 @@ const AboutUs = ({ data_header }) => {
         }
 
       })
-      .catch(() => {
+      .catch((error) => {
+        console.log(error);
       })
 
 
@@ -35,7 +37,7 @@ const AboutUs = ({ data_header }) => {
   return (
     <Layout header_data={data_header}>
       <div
-        className="mx-3 "
+        className="mx-3 mt-10"
       >
         <img
           className="w-full "
@@ -44,11 +46,14 @@ const AboutUs = ({ data_header }) => {
         <div className="leading-[ 22.5px] font-normal">
           <h5 className="text-center">
             {/* {data?.heading || "About School"} */}
+            {/* About us */}
             About us
 
           </h5>
           <p className="mb-0">
-          Vidya niketan School  run by Mr Devendra Singh Ji.Since then it has been training the flame of excellence and creating new breakthrough in the world of education.Principles and vision runs through each and every individual and can be seen in the passion and zeal with which they work. The school’s building and environment are testimony to the fact that the place is more than an educational institution. It not only teaches, but grooms the future of India. The school’s infrastructure has been structured to engineer holistic development of a child. The school not merely works towards living up to its name, but envisions moving beyond it. Therefore we aspire for new goals each year and put our best foot forward to work in the same till the goals are reached. Thus a holistic approach of education is adopted in grooming the students towards becoming best amoung there field. The teachers always make their utmost efforts to keep their students at par or ahead of their times. Thus, they experiment with new ideas and strategies and improvise methods whereby the students can get the extra edge. Much of what the school has gained is due to their commitment. Teachers here work constantly in imparting knowledge in the most innovative ways using different strategies and technology. They are engaging students in various ways through projects to give hands on experience.  </p>
+            Rose Mary School is a Higher secondary school for both girls and boys managed by rose mary Group. Rose Mary Group was established in 1991 and run by Mr Devendra Singh Ji. Our institution is recogniged by the Madhya Pradesh Board of education.
+            We, Rose Mary High School, understand that each child is a distinct individual who needs to be nurtured in order to grow into a mature and responsible citizen. Our academic infrastructure along with a wide range of co-curricular activities help our students in the all round personality development. We have a strong team of motivated teachers who are always ready to accept challenges of developing the potential of each and every student. Keeping in view the ideas of democracy and our ancient culture, Rose Mary High School strives to provide a system of education most suited to the needs of our society today. Stress on innovative methods of teaching , opportunities for shouldering responsibilities during school life, constant participation in sports and co-curricular activities lend meaning to the school life. Thus, the end product is the harmonious, all round developed personality of our students poised on the threshold of life.
+          </p>
         </div>
         <img
           className="w-full"
@@ -76,6 +81,6 @@ export async function getStaticProps(context) {
   }
   return {
     props: { data_header },
-    revalidate: 86400, // revalidate once per day
+    revalidate: 86400, // 24 hours - reduces serverless invocations on Vercel Pro
   }
 }
