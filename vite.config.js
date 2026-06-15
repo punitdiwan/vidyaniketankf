@@ -23,7 +23,7 @@ const apiPlugin = () => ({
 
             const response = await axios.post(`${ERP_BASE_URL}${path}`, {
               // school_id: school_id || 'technicaltesting'
-              school_id: 'vidyaniketankf'
+              school_id: 'vidyanikentankf'
             }, {
               headers: {
                 'Content-Type': 'application/json',
